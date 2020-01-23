@@ -9,7 +9,7 @@ services:
         tags:
             - { name: twig.extension }
     phpfastcache.twig_cache_driver_provider:
-        class: 'Phpfastcache\Bundle\Service\Phpfastcache'
+        parent: Phpfastcache\Bundle\Service\Phpfastcache
     Phpfastcache\Bundle\Twig\CacheExtension\CacheProvider\PsrCacheAdapter:
         arguments:
              - '@phpfastcache.twig_cache_driver_provider'

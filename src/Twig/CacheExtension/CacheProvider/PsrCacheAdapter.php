@@ -18,7 +18,13 @@ declare(strict_types=1);
 
 namespace Phpfastcache\Bundle\Twig\CacheExtension\CacheProvider;
 
+use Phpfastcache\Bundle\Service\Phpfastcache;
 use Phpfastcache\Bundle\Twig\CacheExtension\CacheProviderInterface;
+use Phpfastcache\Exceptions\PhpfastcacheDriverCheckException;
+use Phpfastcache\Exceptions\PhpfastcacheDriverException;
+use Phpfastcache\Exceptions\PhpfastcacheDriverNotFoundException;
+use Phpfastcache\Exceptions\PhpfastcacheInvalidArgumentException;
+use Phpfastcache\Exceptions\PhpfastcacheInvalidConfigurationException;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
@@ -31,14 +37,14 @@ use Psr\Cache\CacheItemPoolInterface;
 class PsrCacheAdapter implements CacheProviderInterface
 {
     /**
-     * @var CacheItemPoolInterface
+     * @var Phpfastcache
      */
     private $cache;
 
     /**
-     * @param CacheItemPoolInterface $cache
+     * @param Phpfastcache $cache
      */
-    public function __construct(CacheItemPoolInterface $cache)
+    public function __construct(Phpfastcache $cache)
     {
         $this->cache = $cache;
     }
@@ -46,11 +52,15 @@ class PsrCacheAdapter implements CacheProviderInterface
     /**
      * @param string $key
      * @return mixed|false
+     * @throws PhpfastcacheDriverCheckException
+     * @throws PhpfastcacheDriverException
+     * @throws PhpfastcacheDriverNotFoundException
+     * @throws PhpfastcacheInvalidArgumentException
+     * @throws PhpfastcacheInvalidConfigurationException
      */
     public function fetch($key)
     {
-        // PSR-6 implementation returns null, CacheProviderInterface expects false
-        $item = $this->cache->getItem($key);
+        $item = $this->cache->getTwigCacheInstance()->getItem($key);
         if ($item->isHit()) {
             return $item->get();
         }
@@ -62,10 +72,15 @@ class PsrCacheAdapter implements CacheProviderInterface
      * @param string $value
      * @param int|\DateInterval $lifetime
      * @return bool
+     * @throws PhpfastcacheDriverCheckException
+     * @throws PhpfastcacheDriverException
+     * @throws PhpfastcacheDriverNotFoundException
+     * @throws PhpfastcacheInvalidArgumentException
+     * @throws PhpfastcacheInvalidConfigurationException
      */
     public function save($key, $value, $lifetime = 0)
     {
-        $item = $this->cache->getItem($key);
+        $item = $this->cache->getTwigCacheInstance()->getItem($key);
         $item->set($value);
         $item->expiresAfter($lifetime);
 

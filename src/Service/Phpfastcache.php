@@ -140,9 +140,9 @@ class Phpfastcache
      * @throws PhpfastcacheInvalidArgumentException
      * @throws PhpfastcacheInvalidConfigurationException
      */
-    public static function getTwigCacheInstance(): ExtendedCacheItemPoolInterface
+    public function getTwigCacheInstance(): ExtendedCacheItemPoolInterface
     {
-        return self::get(self::getConfig()[ 'twig_driver' ]);
+        return $this->get($this->getConfig()[ 'twig_driver' ]);
     }
 
     /**

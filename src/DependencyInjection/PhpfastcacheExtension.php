@@ -41,14 +41,6 @@ class PhpfastcacheExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        /**
-         * Includes services_dev.yml only
-         * if we are in debug mode
-         */
-        if(\in_array($container->getParameter('kernel.environment'), ['dev', 'test'], true)){
-            $loader->load('services_dev.yml');
-        }
-
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
