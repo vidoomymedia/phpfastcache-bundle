@@ -17,6 +17,8 @@
 
 namespace Phpfastcache\Bundle\Twig\CacheExtension;
 
+use Twig\Source;
+
 /**
  * Cache strategy interface.
  *
@@ -29,9 +31,10 @@ interface CacheStrategyInterface
      *
      * @param mixed $key
      *
+     * @param Source $sourceContext
      * @return mixed
      */
-    public function fetchBlock($key, \Twig_Source $sourceContext);
+    public function fetchBlock($key, Source $sourceContext);
 
     /**
      * Generate a key for the value.
@@ -52,5 +55,5 @@ interface CacheStrategyInterface
      *
      * @return mixed
      */
-    public function saveBlock($key, $block, $generationTim, \Twig_Source $sourceContext);
+    public function saveBlock($key, $block, $generationTim, Source $sourceContext);
 }

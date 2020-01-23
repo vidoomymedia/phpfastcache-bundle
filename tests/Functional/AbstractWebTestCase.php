@@ -19,12 +19,14 @@ namespace Phpfastcache\Bundle\Tests\Functional;
 
 use Phpfastcache\Bundle\Tests\Functional\App\Kernel;
 use Phpfastcache\CacheManager as PhpfastcacheManager;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser AS client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
+use function str_replace;
+use function strtoupper;
 
 /**
  * Class IntegrationTest
@@ -36,7 +38,7 @@ class AbstractWebTestCase extends WebTestCase
     /** @var Client */
     protected $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = static::createClient();
         PhpfastcacheManager::clearInstances();
@@ -46,7 +48,7 @@ class AbstractWebTestCase extends WebTestCase
      * @param string $method
      * @param string $uri
      * @param array $headers
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function profileRequest(string $method, string $uri, array $headers = []): Response
     {
@@ -55,7 +57,7 @@ class AbstractWebTestCase extends WebTestCase
         $serverParameter = [];
 
         foreach ($headers as $headerKey => $headerVal) {
-            $serverParameter['HTTP_' . \str_replace('-', '_', \strtoupper($headerKey))] = $headerVal;
+            $serverParameter['HTTP_' . str_replace('-', '_', strtoupper($headerKey))] = $headerVal;
         }
 
         $client->request($method, $uri, [], [], $serverParameter);
@@ -66,7 +68,7 @@ class AbstractWebTestCase extends WebTestCase
     /**
      * Manage schema and cleanup chores
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::deleteTmpDir();
         PhpfastcacheManager::clearInstances();
@@ -83,12 +85,12 @@ class AbstractWebTestCase extends WebTestCase
         ]);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         static::deleteTmpDir();
     }
 
-    protected static function deleteTmpDir()
+    protected static function deleteTmpDir(): void
     {
         if (!file_exists($dir = __DIR__ . '/App/var')) {
             return;

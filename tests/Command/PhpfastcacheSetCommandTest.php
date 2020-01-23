@@ -41,7 +41,7 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
     }
 
     public function testCommandSetCacheItemWithAutomaticTypeCastingBoolean()
@@ -62,8 +62,8 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
-        $this->assertContains('(automatically type-casted to boolean)', $commandTester->getDisplay(), true);
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringContainsString('(automatically type-casted to boolean)', $commandTester->getDisplay(), true);
     }
 
     public function testCommandSetCacheItemWithAutomaticTypeCastingInteger()
@@ -84,8 +84,8 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
-        $this->assertContains('(automatically type-casted to integer)', $commandTester->getDisplay(), true);
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringContainsString('(automatically type-casted to integer)', $commandTester->getDisplay(), true);
     }
 
     public function testCommandSetCacheItemWithAutomaticTypeCastingFloat()
@@ -106,8 +106,8 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
-        $this->assertContains('(automatically type-casted to double)', $commandTester->getDisplay(), true);
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringContainsString('(automatically type-casted to double)', $commandTester->getDisplay(), true);
     }
 
     public function testCommandSetCacheItemWithAutomaticTypeCastingNull()
@@ -128,8 +128,8 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
-        $this->assertContains('(automatically type-casted to NULL)', $commandTester->getDisplay(), true);
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringContainsString('(automatically type-casted to NULL)', $commandTester->getDisplay(), true);
     }
 
     public function testCommandSetCacheItemWithAutomaticTypeCastingJson()
@@ -150,8 +150,8 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
-        $this->assertContains('(automatically type-casted to array)', $commandTester->getDisplay(), true);
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringContainsString('(automatically type-casted to array)', $commandTester->getDisplay(), true);
     }
 
     public function testCommandSetCacheItemWithoutAutomaticTypeCasting()
@@ -172,8 +172,8 @@ class PhpfastcacheSetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
-        $this->assertNotContains('(automatically type-casted to NULL)', $commandTester->getDisplay(), true);
+        $this->assertStringContainsString('Cache item "' . $key . '" set to "' . $value . '" for ' . $ttl . ' seconds', $commandTester->getDisplay());
+        $this->assertStringNotContainsString('(automatically type-casted to NULL)', $commandTester->getDisplay(), true);
     }
 
     /**

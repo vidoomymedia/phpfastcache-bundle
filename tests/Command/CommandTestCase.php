@@ -59,7 +59,7 @@ abstract class CommandTestCase extends TestCase
     /**
      * SetUp called before each tests, setting up the environment (application, globally used mocks)
      */
-    public function setUp()
+    public function setUp(): void
     {
         CacheManager::clearInstances();
         putenv('COLUMNS=200');// Prevent broken console rendering  with unit tests

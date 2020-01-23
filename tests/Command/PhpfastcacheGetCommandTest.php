@@ -45,7 +45,7 @@ class PhpfastcacheGetCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('[HIT] string(32) "' . $value . '"', $commandTester->getDisplay());
+        $this->assertStringContainsString('[HIT] string(32) "' . $value . '"', $commandTester->getDisplay());
     }
 
     /**

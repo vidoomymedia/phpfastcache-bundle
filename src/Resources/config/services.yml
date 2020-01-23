@@ -10,7 +10,6 @@ services:
             - { name: twig.extension }
     phpfastcache.twig_cache_driver_provider:
         class: 'Phpfastcache\Bundle\Service\Phpfastcache'
-        factory: 'Phpfastcache\Bundle\Service\Phpfastcache:getTwigCacheInstance'
     Phpfastcache\Bundle\Twig\CacheExtension\CacheProvider\PsrCacheAdapter:
         arguments:
              - '@phpfastcache.twig_cache_driver_provider'

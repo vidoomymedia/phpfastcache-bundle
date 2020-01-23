@@ -45,7 +45,7 @@ class PhpfastcacheDelCommandTest extends CommandTestCase
           '--no-interaction' => true
         ]);
 
-        $this->assertContains('OK] Cache item "' .  $key . '" has been deleted from cache', $commandTester->getDisplay());
+        $this->assertStringContainsString('OK] Cache item "' .  $key . '" has been deleted from cache', $commandTester->getDisplay());
     }
 
     /**

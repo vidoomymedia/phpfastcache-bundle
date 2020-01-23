@@ -18,12 +18,15 @@ declare(strict_types=1);
 
 namespace Phpfastcache\Bundle\Twig\CacheExtension;
 
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+
 /**
  * Extension for caching template blocks with twig.
  *
  * @author Alexander <iam.asm89@gmail.com>
  */
-class Extension extends \Twig_Extension
+class Extension extends AbstractExtension
 {
     private $cacheStrategy;
 
@@ -48,7 +51,7 @@ class Extension extends \Twig_Extension
      */
     public function getName()
     {
-        if (\version_compare(\Twig_Environment::VERSION, '1.26.0', '>=')) {
+        if (\version_compare(Environment::VERSION, '1.26.0', '>=')) {
             return \get_class($this);
         }
         return 'phpfastcache_cache';

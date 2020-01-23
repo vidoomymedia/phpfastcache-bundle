@@ -22,6 +22,7 @@ use Phpfastcache\Bundle\DataCollector\CacheCollector;
 use Phpfastcache\Bundle\Twig\CacheExtension\CacheProviderInterface;
 use Phpfastcache\Bundle\Twig\CacheExtension\CacheStrategyInterface;
 use Phpfastcache\Bundle\Twig\CacheExtension\Exception\InvalidCacheLifetimeException;
+use Twig\Source;
 
 /**
  * Strategy for caching with a pre-defined lifetime.
@@ -69,7 +70,7 @@ class LifetimeCacheStrategy implements CacheStrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function fetchBlock($key, \Twig_Source $sourceContext)
+    public function fetchBlock($key, Source $sourceContext)
     {
         $generationTimeMc = \microtime(true);
         $cacheData = $this->cache->fetch($key[ 'key' ]);
@@ -112,7 +113,7 @@ class LifetimeCacheStrategy implements CacheStrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function saveBlock($key, $block, $generationTime, \Twig_Source $sourceContext)
+    public function saveBlock($key, $block, $generationTime, Source $sourceContext)
     {
         $unprefixedKey = \substr($key[ 'key' ], \strlen($this->twigCachePrefix));
 

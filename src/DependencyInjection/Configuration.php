@@ -30,12 +30,13 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritDoc}
      *
-     * @throws \RuntimeException
+     * @return TreeBuilder
+     * @throws \Phpfastcache\Exceptions\PhpfastcacheUnsupportedOperationException
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('phpfastcache');
+        $treeBuilder = new TreeBuilder('phpfastcache');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()

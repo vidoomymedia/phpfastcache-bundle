@@ -16,19 +16,22 @@
 
 namespace Phpfastcache\Bundle\Twig\HumanReadableExtension;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
 /**
  * Class HumanReadableExtension
  * @package Phpfastcache\Bundle\Twig
  */
-class Extension extends \Twig_Extension
+class Extension extends AbstractExtension
 {
     /**
      * @return array
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-          new \Twig_SimpleFilter('sizeFormat', [$this, 'size_format']),
+          new TwigFilter('sizeFormat', [$this, 'size_format']),
         ];
     }
 
